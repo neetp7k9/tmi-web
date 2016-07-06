@@ -1,0 +1,13 @@
+development:
+  MYSQL_DATABASE: 'nexus_development'
+  MYSQL_USERNAME: 'root'
+  MYSQL_PASSWORD: '1aA$:adf_asd134'
+test:
+  MYSQL_DATABASE: 'nexus_test'
+  MYSQL_USERNAME: 'root'
+  MYSQL_PASSWORD: '1aA$:adf_asd134'
+production:
+  MYSQL_DATABASE: 'nexus'
+  MYSQL_USERNAME: 'root'
+  MYSQL_PASSWORD: '1aA$:adf_asd134'
+

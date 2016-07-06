@@ -1,0 +1,106 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+zh-TW:
+  hello: "Hello world"
+
+# Application page 
+  Report_bug: "回報錯誤"
+
+  Terms:  "使用條款"
+  Policy: "隱私權條款"
+  Rights: "保留所有權利" 
+ 
+  user:
+        logout: "登出"
+        help: "幫助"
+        feedback: "回報問題"
+        settings: "設定"
+   
+  bugReport:
+             title: "回報問題"
+             thanks: "謝謝你讓我們變得更好"
+             description: "請描述你的問題"
+             close: "關閉"
+             report: "送出"
+
+# Home page
+  home:
+        description: "用圖片,PDF檔和文字來搜尋相似的專案"     
+        import_old_projects: 
+                             title: "匯入舊專案"
+                             description: "輸入專案資訊以創建專案"
+                             add: "加入專案"
+                             client_name: "客戶名稱"
+                             product_name: "產品名稱"
+                             amount: "數量"
+        search_by_image: 
+                         title: "以圖搜尋"
+                         hint: "拖曳圖片或點此上傳"
+        search_by_text: 
+                        title: "文字搜尋"
+                        description: "用關鍵字找相似專案"
+                        search: "搜尋" 
+                        keywords: "輸入關鍵字"
+
+
+        add_new_project: "加入新專案"
+        documents: "個文件"
+
+        add_project_modal:
+                            title: "加入新專案"
+                            project_name: "專案名稱"
+                            add: "加入"
+                            close: "關閉"
+        add_document_modal: 
+                            title: "加入新檔案"
+                            document_file: "檔案"
+                            add: "加入"
+                            close: "關閉"
+
+
+#project page
+  project:
+           cropped_images: "張擷取圖片"
+           crop: "擷取圖片"
+           add_document: "加入新檔案"
+           sort_by: "排序:"
+           name: "名稱"
+           time: "時間"
+           import_old_documents:
+                                 title: "匯入檔案"
+                                 description: "匯入檔案至專案"
+                                 hint: "拖曳圖片或點此上傳"
+
+#search result page
+
+  search_result:
+                 title: "搜尋結果"
+                 text: "搜尋文字"
+                 target: "搜尋圖片"
+                 description1: "我們在%{size}個文件中找到%{text}"
+                 description2: "點擊任一個檔案看結果"
+                 description3: "我們在%{size}個文件中找到這圖片"
+  crop:
+        description: "用來搜尋的關鍵區塊"
+        search_all_image: "上傳關鍵區塊"
+        search_full_image: "搜群整張圖"
+        search_cropped_image: "搜尋關鍵區塊"

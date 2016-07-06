@@ -1,0 +1,30 @@
+I"¼(function() {
+  Storytime.Dashboard.Pages = (function() {
+    function Pages() {}
+
+    Pages.prototype.initNew = function() {
+      this.editor = new Storytime.Dashboard.Posts();
+      return this.editor.initNew();
+    };
+
+    Pages.prototype.initEdit = function() {
+      this.editor = new Storytime.Dashboard.Posts();
+      return this.editor.initEdit();
+    };
+
+    Pages.prototype.initCreate = function() {
+      this.editor = new Storytime.Dashboard.Posts();
+      return this.editor.initCreate();
+    };
+
+    Pages.prototype.initUpdate = function() {
+      this.editor = new Storytime.Dashboard.Posts();
+      return this.editor.initUpdate();
+    };
+
+    return Pages;
+
+  })();
+
+}).call(this);
+:ET

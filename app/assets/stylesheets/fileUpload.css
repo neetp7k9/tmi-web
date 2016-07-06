@@ -1,0 +1,110 @@
+ /** css  **/
+#text_input{
+  display : inline;
+  width : 300px;
+}
+#text_search_button{
+  display : inline;
+  width : 80px;
+}
+#text_search_form{
+  margin: auto;
+  width : 420px;
+}
+.gallery-item {
+  background-color: #FFF;
+}
+div.camera{
+  height: 300px;
+  width: 300px;
+}
+
+div.draghere{
+  height: 300px;
+  width: 300px;
+  display: none;
+}
+
+div.draghere:hover{
+  opacity: 1;
+}
+
+
+input#text_input {
+    border-radius: 4px;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    font-family: Arial, sans-serif;
+    -webkit-appearance: none;
+    color: #2c2c2c;
+    outline: 2px;
+    height: 35px;
+    padding: 9px 12px;
+    line-height: normal;
+    font-size: 14px;
+    font-weight: normal;
+    vertical-align: middle;
+    min-height: 35px;
+    box-shadow: none;
+    text-align: left;
+    margin-bottom: 2px;
+}
+img.add_file{
+  height: 200px;
+  text-align: center;
+}
+.whiteSpace{
+  height: 100px;
+}
+
+#dropzone {
+  position: relative;
+  font: bold 24px/200px arial;
+  height: 280px;
+  margin: 30px auto;
+  text-align: center;
+  width: 320px;
+}
+
+#dropzone.hover {
+  border: 10px solid #FE5;
+  color: #FE5;
+}
+
+#dropzone.dropped {
+  background: #222;
+  border: 10px solid #444;
+}
+
+#dropzone div {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+#dropzone img {
+  border-radius: 10px;
+  vertical-align: middle;
+  max-width: 95%;
+  max-height: 95%;
+}
+
+#dropzone [type="file"] {
+  cursor: pointer;
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+h2{
+    text-align: center;
+}
+
+
+

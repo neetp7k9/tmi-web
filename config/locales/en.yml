@@ -1,0 +1,109 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  hello: "Hello world"
+
+#Application page
+  Report_bug: "Report Bug"
+
+  Terms:  "Terms of use"
+  Policy: "Privacy Policy"
+  Rights: "All rights reserved."
+  
+
+  user:
+        logout: "Logout"
+        help: "Help"
+        feedback: "Feedback"
+        settings: "Settings"
+   
+  bugReport:
+             title: "Report a Bug"
+             thanks: "Thank you for helping us to be better"
+             description: "Please descript your problem"
+             close: "Close"
+             report: "Report"
+
+#Home page
+  home:
+        description: "Use image, pdf, and text to find similar projects" 
+        import_old_projects: 
+                             title: "Import Old Project"
+                             description: "input project information to create new project"
+                             add: "Add Project" 
+                             client_name: "Client Name"
+                             product_name: "Product Name"
+                             amount: "Amount"
+        search_by_image: 
+                         title: "Search By Image"
+                         hint: "Drag or click here"
+        search_by_text: 
+                        title: "Search By Text"
+                        description: "input keyword to search similar projects"
+                        search: "Search"
+                        keywords: "Enter Keywords"
+
+        add_new_project: "Add New Project"
+        documents: "documents"
+
+        add_project_modal:
+                            title: "Add New Project"
+                            project_name: "Project Name"
+                            add: "Add"
+                            close: "Close"
+        add_document_modal:
+                            title: "Add New Document"
+                            document_file: "Document file"
+                            add: "Add"
+                            close: "Close"
+
+#project page
+  project:
+           cropped_images: "cropped images"
+           crop: "Crop"
+           add_document: "Add Document"
+           sort_by: "Sort by:"
+           name: "Name"
+           time: "Time"
+
+           import_old_documents: 
+                                title: "Import Old Document"
+                                description: "Import to create new document"
+                                hint: "Drag or click here"
+                                add: "Add Document" 
+                                client_name: "Client Name"
+                                product_name: "Document Name"
+                                amount: "Amount"
+
+#search result page
+  search_result:
+                 title: "Search Result"
+                 text: "Search Text"
+                 target: "Search Target"
+                 description1: "We find %{text} in the following %{size} documents"
+                 description2: "Click any document to see results."
+                 description3: "We find image in the following %{size} documents"
+  crop:
+        description: "Search for documents containing these images:"
+        upload_all_image: "upload_all_image"
+        search_full_image: "search full document"
+        search_cropped_image: "search cropped image"

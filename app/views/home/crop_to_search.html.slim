@@ -1,0 +1,47 @@
+=javascript_include_tag "cropdependency"
+=stylesheet_link_tag "cropdependency"
+div class="search" id="#{@search_id}"    
+div class="document" id="#{@document_id}"
+.container-outside
+  .container
+    .row
+      .col-md-9
+        .img-container
+          img#image[src="#{@document.avatar.url(:origin)}" alt="Picture"]
+    .row
+      .col-md-9.docs-buttons
+        .btn-group
+          button.btn.btn-primary[type="button" data-method="zoom" data-option="0.1" title="Zoom In"]
+            span.docs-tooltip[data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, 0.1)"]
+              span.fa.fa-search-plus
+          button.btn.btn-primary[type="button" data-method="zoom" data-option="-0.1" title="Zoom Out"]
+            span.docs-tooltip[data-toggle="tooltip" title="$().cropper(&quot;zoom&quot;, -0.1)"]
+              span.fa.fa-search-minus
+        .btn-group
+          button.btn.btn-primary[type="button" data-method="move" data-option="-10" data-second-option="0" title="Move Left"]
+            span.docs-tooltip[data-toggle="tooltip" title="$().cropper(&quot;move&quot;, -10, 0)"]
+              span.fa.fa-arrow-left
+          button.btn.btn-primary[type="button" data-method="move" data-option="10" data-second-option="0" title="Move Right"]
+            span.docs-tooltip[data-toggle="tooltip" title="$().cropper(&quot;move&quot;, 10, 0)"]
+              span.fa.fa-arrow-right
+          button.btn.btn-primary[type="button" data-method="move" data-option="0" data-second-option="-10" title="Move Up"]
+            span.docs-tooltip[data-toggle="tooltip" title="$().cropper(&quot;move&quot;, 0, -10)"]
+              span.fa.fa-arrow-up
+          button.btn.btn-primary[type="button" data-method="move" data-option="0" data-second-option="10" title="Move Down"]
+            span.docs-tooltip[data-toggle="tooltip" title="$().cropper(&quot;move&quot;, 0, 10)"]
+              span.fa.fa-arrow-down
+        .btn-group
+          button.btn.btn-primary[type="button" data-method="getCroppedCanvas"]
+            span.docs-tooltip[data-toggle="tooltip" title="$().cropper(&quot;getCroppedCanvas&quot;)"]
+              span.fa.fa-check
+          button.btn.btn-primary[type="button" data-method="clear" title="Clear"]
+            span.docs-tooltip[data-toggle="tooltip" title="$().cropper(&quot;clear&quot;)"]
+              span.fa.fa-remove
+        .btn-group.btn-group-crop
+          button.btn.btn-primary[type="button" onclick="searchFullDocument(); return false;"]
+            | #{t("crop.search_full_image")}
+        .btn-group.btn-group-crop
+          button.btn.btn-primary[type="button" onclick="searchAll(); return false;"]
+            | #{t("crop.search_cropped_image")}
+  #imageCollection
+    h5 #{t("crop.description")}

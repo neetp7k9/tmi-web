@@ -1,0 +1,79 @@
+I"6(function() {
+  var initJS;
+
+  initJS = function(controller, action) {
+    var controllerObj, instance;
+    controllerObj = Storytime.Utilities.controllerFromString(controller);
+    if (controllerObj != null) {
+      instance = new controllerObj();
+      if (typeof instance["init"] === "function") {
+        instance["init"]();
+      }
+      if (typeof instance["init" + action] === "function") {
+        instance["init" + action]();
+      }
+      return Storytime.instance = instance;
+    }
+  };
+
+  $(function() {
+    initJS($("body").data("controller"), $("body").data("action"));
+    if (!(window.Storytime.test_env || window.Storytime.persistent_flash_message)) {
+      $(".flash").delay(4000).fadeOut();
+    }
+    $(".chosen").chosen();
+    $(document).on('ajax:beforeSend', '.btn-delete-resource', function() {
+      return $(this).attr("disabled", true);
+    }).on('ajax:success', '.btn-delete-resource', function() {
+      return $("#" + ($(this).data('resource-type')) + "_" + ($(this).data('resource-id'))).remove();
+    }).on('ajax:error', '.btn-delete-resource', function(e, data, d1, d2) {
+      $(this).attr("disabled", false);
+      return alert("There was an error deleting your " + ($(this).data('resource-type')));
+    });
+    $(".table-row-link").on("click", function(e) {
+      var url;
+      if (!(($(e.target).data("confirm") != null) || $(e.target).parent("a[data-confirm]").length > 0)) {
+        url = $(this).data('url');
+        return document.location.href = url;
+      }
+    });
+    $(document).on("click", ".storytime-menu-toggle", function(e) {
+      e.preventDefault();
+      $("#storytime-main-menu").toggle();
+      return $("#storytime-sites-menu").toggle();
+    });
+    $(document).on('ajax:success', '.storytime-modal-trigger, #storytime-modal .pagination a', function(e, data, status, xhr) {
+      $("#storytime-modal .modal-content").html(data.html);
+      $("#storytime-modal").removeClass("modal-wide");
+      initJS($("#storytime-modal-controller").val(), $("#storytime-modal-action").val());
+      return $("#storytime-modal").modal("show");
+    });
+    return $(document).on('ajax:success', '.storytime-modal-form', function(e, data, status, xhr) {
+      if (!$(e.target).hasClass("storytime-modal-trigger")) {
+        if ($(this).data("redirect") === "index") {
+          $("#storytime-modal").removeClass("modal-wide");
+          $("#storytime-modal .modal-content").html(data.html);
+          if ($("#storytime-modal-controller").length && $("#storytime-modal-action").length) {
+            initJS($("#storytime-modal-controller").val(), $("#storytime-modal-action").val());
+          }
+        }
+        $('body').append("<div class='flash js-flash'><div class='flash-success'>Your changes were saved successfully</div></div>");
+        $('.chosen').chosen({
+          width: '100%'
+        });
+        return $(".js-flash").show().delay(4000).fadeOut('300', function() {
+          return $(this).remove();
+        });
+      }
+    }).on("ajax:error", ".storytime-modal-form", function(e, xhr, status, error) {
+      var data;
+      if (!$(e.target).hasClass("storytime-modal-trigger")) {
+        data = JSON.parse(xhr.responseText);
+        $("#storytime-modal .modal-content").html(data.html);
+        return initJS($("#storytime-modal-controller").val(), $("#storytime-modal-action").val());
+      }
+    });
+  });
+
+}).call(this);
+:ET

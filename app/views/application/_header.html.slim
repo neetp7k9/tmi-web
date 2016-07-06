@@ -1,0 +1,92 @@
+    .header
+      .pull-left.full-height.visible-sm.visible-xs
+        .sm-action-bar
+          a.btn-link.toggle-sidebar[href="#" data-toggle="sidebar"]
+            span.icon-set.menu-hambuger
+      .pull-right.full-height.visible-sm.visible-xs
+        .sm-action-bar
+          a.btn-link[href="#" data-toggle="quickview" data-toggle-element="#quickview"]
+            span.icon-set.menu-hambuger-plus
+      .pull-left.sm-table
+        .header-inner
+          .brand.inline
+          /   |  <img src="
+          /   = image_path('logo.png')
+          /   | " alt="logo" data-src="
+          /   = image_path('logo.png')
+          /   | " data-src-retina="
+          /   = image_path('logo_2x.png')
+          /   | " width="78" height="22"> 
+          / ul.notification-list.no-margin.hidden-sm.hidden-xs.b-grey.b-l.b-r.no-style.p-l-30.p-r-20
+          /   li.p-r-15.inline
+          /     .dropdown
+          /       a#notification-center.icon-set.globe-fill[href="javascript:;" data-toggle="dropdown"]
+          /         span.bubble
+          /       .dropdown-menu.notification-toggle[role="menu" aria-labelledby="notification-center"]
+          /         .notification-panel
+          /           .notification-body.scrollable
+          /             .notification-item.clearfix
+          /               .heading
+          /                 a.text-danger[href="#"]
+          /                   i.fa.fa-exclamation-triangle.m-r-10
+          /                   span.bold
+          /                     | 98% Server Load
+          /                   span.fs-12.m-l-10
+          /                     | Take Action
+          /                 span.pull-right.time
+          /                   |  2 mins ago 
+          /               .option
+          /                 a.mark[href="#"]
+          /           .notification-footer.text-center
+          /             a[href="#"]
+          /               | Read all notifications
+          /             a.portlet-refresh.text-black.pull-right[data-toggle="refresh" href="#"]
+                        i.pg-refresh_new
+            / li.p-r-15.inline
+            /   a.icon-set.clip[href="#"]
+            / li.p-r-15.inline
+            /   a.icon-set.grid-box[href="#"]
+          a.search-link[href="#" data-toggle="search"]
+            i.pg-search
+            | Type anywhere to 
+            span.bold
+              | search
+      .pull-right
+        .header-inner
+          / a.btn-link.icon-set.menu-hambuger-plus.m-l-20.sm-no-margin.hidden-sm.hidden-xs[href="#" data-toggle="quickview" data-toggle-element="#quickview"]
+      .pull-right
+        .visible-lg.visible-md.m-t-10
+          .pull-left.p-r-10.p-t-10.fs-16.font-heading
+            span.semi-bold
+              | David
+            span.text-master
+              | Nest
+          .dropdown.pull-right
+            button.profile-dropdown-toggle[type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"]
+              span.thumbnail-wrapper.d32.circular.inline.m-t-5
+                / |  <img src="
+                / = image_path('profiles/avatar.jpg')
+                / | " alt="" data-src="
+                / = image_path('profiles/avatar.jpg')
+                / | " data-src-retina="
+                / = image_path('profiles/avatar_small2x.jpg')
+                / | " width="32" height="32"> 
+            ul.dropdown-menu.profile-dropdown[role="menu"]
+              li
+                a[href="#"]
+                  i.pg-settings_small
+                  |  Settings
+              li
+                a[href="#"]
+                  i.pg-outdent
+                  |  Feedback
+              li
+                a[href="#"]
+                  i.pg-signals
+                  |  Help
+              li.bg-master-lighter
+                a.clearfix[href="#"]
+                  span.pull-left
+                    | Logout
+                  span.pull-right
+                    i.pg-power

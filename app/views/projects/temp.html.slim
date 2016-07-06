@@ -1,0 +1,36 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+<script src="/myAssets/project.js"></script>
+p#notice = notice
+p class="project" id=@project.id
+p
+  strong Project Name:
+  = @project.name
+
+  - @project.documents.each do |document|
+      
+      p document Name:  #{document.name}
+      = image_tag document.avatar.url(:thumb)
+      a href="/crop?id=#{document.id}"  Crop Document  
+      br 
+button onclick="newDocument()"  Add New Document  
+
+= link_to 'Edit', edit_project_path(@project)
+'|
+= link_to 'Back', root_path
+div class="modal fade" id="addDocumentModal" aria-hidden="true" role="dialog" tabindex="-1"
+  div class="modal-dialog"
+    div class="modal-content"
+      div class="modal-header"
+         button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+           h4 class="modal-title" id="getCroppedCanvasTitle">Add New Document
+      div class="modal-body"
+         div class="field"
+           form id="formData"
+             label for="project_name" Document file 
+             input type="file" name="file" id="document_file" 
+             input type="hidden" name="project_id" value="#{@project.id}"
+      div class="modal-footer"
+         button type="button" class="btn btn-default" data-dismiss="modal" Close
+         button id="createProject" type="button" class="btn btn-primary" onclick="addDocument()" Add

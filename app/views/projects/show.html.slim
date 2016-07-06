@@ -1,0 +1,90 @@
+=javascript_include_tag "projects"
+=stylesheet_link_tag "projects"
+.whiteSpace
+.text
+   h2.title #{t("home.description")} 
+  
+
+
+<!-- Tabs -->
+#tabs
+        ul
+            li 
+               a href="#tabs-1" #{t("project.import_old_documents.title")}
+            li
+               a href="#tabs-2" Folder upload 
+
+        #tabs-1
+           h2 #{t("project.import_old_documents.description")}
+           p.import
+           .importZone[stype="width: 500px;"]
+             #dropzone[style="border-style: dashed;"]
+               p[id="dropzone-text" style="position: bottom-left; top:200px;margin-top: 130px;font-size: 30px;"]  #{t("project.import_old_documents.hint")} 
+               form#importForm
+                 input type="hidden" id="addDocumentModal_Project_Id" name="project_id" value="#{@project.id}"
+                 input[type="file" id="document_for_import" name="file"]
+        #tabs-2
+            p.search 
+              h2 please select a folder to upload 
+              input#project_id[type="hidden" name="project_id" value="#{@project.id}"]
+              input#file_input_dir[type="file" multiple="" webkitdirectory="" directory=""] 
+
+.button_click[id="false"]
+.page_now[id="document"]
+.container-fluid.container-fixed-lg.sm-p-l-20.sm-p-r-20
+  .gallery
+
+    - @project.documents.each do |document|
+     .gallery-item[data-width="1" data-height="1" id="#{document.id}"]
+       img.image-responsive-height[src=document.avatar.url(:thumb) alt=""]
+       .overlayer.bottom-left.full-width
+         .overlayer-wrapper.item-info
+           .gradient-grey.p-l-20.p-r-20.p-t-20.p-b-5
+             div
+               h2.pull-left.text-white.p-t-10
+                 | #{document.name} 
+               .clearfix
+             .m-t-10
+               .inline.m-l-10
+                 h5.pull-right.semi-bold.text-white.font-montserrat.bold
+                   | #{document.images.size-1} #{t("project.cropped_images")}
+               .pull-right.m-t-10
+                 h5.no-margin 
+                   a href="/crop?id=#{document.id}"  #{t("project.crop")}
+                 h5.no-margin 
+                   button.btn.btn-primary.deleteDocument[type="button" id="#{document.id}" ]
+                     | delete
+               .clearfix
+/    .gallery-item[data-width="1" data-height="1" id="addDocument"]
+/      img.add_file [src="/myAssets/image/fa2.png" alt=""]
+/      .overlayer.bottom-left.full-width
+/        .overlayer-wrapper.item-info
+/          .gradient-grey.p-l-20.p-r-20.p-t-20.p-b-5
+/            div
+/              p.pull-left.bold.text-white.fs-14.p-t-10
+/                | 
+/              h4.pull-right.semi-bold.text-white.font-montserrat.bold
+/                | #{t("project.add_document")}
+/              .clearfix
+/            .m-t-10
+/              .inline.m-l-10
+/                p.no-margin.text-white.fs-12
+/                  | 
+/              .clearfix
+
+
+div class="modal fade" id="addDocumentModal" aria-hidden="true" role="dialog" tabindex="-1"
+  div class="modal-dialog"
+    div class="modal-content"
+      div class="modal-header"
+         button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+           h4 class="modal-title" id="getCroppedCanvasTitle" #{t("home.add_document_modal.title")}
+      div class="modal-body"
+         div class="field"
+           form id="formData"
+             label for="document_name" #{t("home.add_document_modal.document_file")}
+             input type="file" name="file" id="document_file"
+             input type="hidden" id="addDocumentModal_Project_Id" name="project_id" value="#{@project.id}"
+      div class="modal-footer"
+         button type="button" class="btn btn-default" data-dismiss="modal" #{t("home.add_document_modal.close")}
+         button id="NewAddDocument" type="button" class="btn btn-primary" onclick="addDocument()" #{t("home.add_document_modal.add")} 

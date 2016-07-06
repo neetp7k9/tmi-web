@@ -1,0 +1,34 @@
+=javascript_include_tag "documents"
+=stylesheet_link_tag "documents"
+.whiteSpace
+.button_click[id="false"]
+.page_now[id="image"]
+.page_info[id="#{@document.id}"]
+.container-fluid.container-fixed-lg.sm-p-l-20.sm-p-r-20
+  h1
+    a href="/projects/#{@document.project_id}"  =@document.project.name 
+    |  #{@document.name}
+  a href="#{@document.avatar.url}" 
+      img.image-responsive-height[src="#{@document.avatar.url(:origin)}" alt=""]
+  .gallery
+    - @images.each do |image|
+     .gallery-item[data-width="1" data-height="1" id="#{image.id}"]
+       img.image-responsive-height[src="#{image.avatar.url}" alt=""]
+
+    .gallery-item[data-width="1" data-height="1" id="addImage"]
+      img.add_file [src="/myAssets/image/fa2.png" alt=""]
+      .overlayer.bottom-left.full-width
+        .overlayer-wrapper.item-info
+          .gradient-grey.p-l-20.p-r-20.p-t-20.p-b-5
+            div
+              p.pull-left.bold.text-white.fs-14.p-t-10
+                |  add Image
+              .clearfix
+            .m-t-10
+              .inline.m-l-10
+                p.no-margin.text-white.fs-12
+                  h2 Add new Image 
+
+
+
+

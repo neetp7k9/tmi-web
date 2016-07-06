@@ -1,0 +1,67 @@
+I"Y(function() {
+  Storytime.Dashboard.Posts = (function() {
+    function Posts() {}
+
+    Posts.prototype.initNew = function() {
+      this.editor = new Storytime.Dashboard.Editor();
+      this.editor.init();
+      return this.initCollapse();
+    };
+
+    Posts.prototype.initEdit = function() {
+      this.editor = new Storytime.Dashboard.Editor();
+      this.editor.init();
+      return this.initCollapse();
+    };
+
+    Posts.prototype.initCreate = function() {
+      this.editor = new Storytime.Dashboard.Editor();
+      this.editor.init();
+      return this.initCollapse();
+    };
+
+    Posts.prototype.initUpdate = function() {
+      this.editor = new Storytime.Dashboard.Editor();
+      this.editor.init();
+      return this.initCollapse();
+    };
+
+    Posts.prototype.initCollapse = function() {
+      $('body').on('keydown', function(e) {
+        if (e.which === 27) {
+          return $(".post-action-panel.in").collapse("hide");
+        }
+      });
+      $(".post-action-panel").on("show.bs.collapse", function() {
+        $(".post-action-panel").removeClass("in");
+        $(".scroll-panel-header").fadeOut({
+          duration: 'fast',
+          easing: 'swing'
+        });
+        $(".scroll-panel-body").scrollTop(0);
+        return $(".scroll-panel-body").animate({
+          top: "0"
+        }, 'fast', 'swing');
+      });
+      $(".post-action-panel").on("shown.bs.collapse", function() {
+        return $(".chosen-select").trigger("chosen:updated");
+      });
+      return $(".post-action-panel").on("hide.bs.collapse", function() {
+        var top;
+        top = $(".scroll-panel-body").data("top");
+        $(".scroll-panel-header").fadeIn({
+          duration: 'fast',
+          easing: 'swing'
+        });
+        return $(".scroll-panel-body").animate({
+          top: top
+        }, 'fast', 'swing');
+      });
+    };
+
+    return Posts;
+
+  })();
+
+}).call(this);
+:ET

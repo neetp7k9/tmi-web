@@ -1,0 +1,22 @@
+I"ø(function() {
+  Storytime.Dashboard.Memberships = (function() {
+    function Memberships() {}
+
+    Memberships.prototype.initIndex = function() {
+      $(".chosen").chosen({
+        width: "100%"
+      });
+      return $(document).on("ajax:success", ".new_membership", function(e, data, status, xhr) {
+        $("#storytime-modal .modal-content").html(data.html);
+        return $(".chosen").chosen({
+          width: "100%"
+        });
+      });
+    };
+
+    return Memberships;
+
+  })();
+
+}).call(this);
+:ET

@@ -1,0 +1,129 @@
+doctype html
+html
+  head
+    meta[http-equiv="content-type" content="text/html;charset=UTF-8"]
+    meta[charset="utf-8"]
+    title
+      | EagleEye - a search engine for manufacturing specification documents
+    meta[name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no"]
+    link[rel="apple-touch-icon" href="pages/ico/60.png"]
+    link[rel="apple-touch-icon" sizes="76x76" href="pages/ico/76.png"]
+    link[rel="apple-touch-icon" sizes="120x120" href="pages/ico/120.png"]
+    link[rel="apple-touch-icon" sizes="152x152" href="pages/ico/152.png"]
+    link[rel="icon" type="image/x-icon" href="favicon.ico"]
+    meta[name="apple-mobile-web-app-capable" content="yes"]
+    meta[name="apple-touch-fullscreen" content="yes"]
+    meta[name="apple-mobile-web-app-status-bar-style" content="default"]
+    meta[content="" name="description"]
+    meta[content="" name="author"]
+
+    =stylesheet_link_tag "application"
+    =javascript_include_tag "application"     
+  body.fixed-header[data-no-turbolink]
+    p.notice =notice
+    p.alert =alert    
+    .page-container
+      .header
+        .container-fluid.relative
+          .pull-left.full-height.visible-sm.visible-xs
+            .header-inner
+              a.btn-link.toggle-sidebar.visible-sm-inline-block.visible-xs-inline-block.padding-5[href="#" data-toggle="sidebar"]
+                span.icon-set.menu-hambuger
+          .pull-center.hidden-md.hidden-lg
+            .header-inner
+              .brand.inline
+                h1
+                  | 
+                  a[href="/"] EagleEye
+          .pull-right.full-height.visible-sm.visible-xs
+            .header-inner
+              a.btn-link.visible-sm-inline-block.visible-xs-inline-block[href="#" data-toggle="quickview" data-toggle-element="#quickview"]
+                span.icon-set.menu-hambuger-plus
+        .pull-left.sm-table.hidden-xs.hidden-sm
+          .header-inner
+            .brand.inline
+              h2
+                a[href="/"]  EagleEye
+            ul.notification-list.no-margin.hidden-sm.hidden-xs.b-grey.b-l.b-r.no-style.p-l-30.p-r-20
+              li.p-r-15.inline
+                a.reportBugButton #{t("Report_bug")}
+              li.p-r-15.inline
+                =locale_to_change
+        - if user_signed_in?
+         .pull-right
+           .visible-lg.visible-md.m-t-10
+             .pull-left.p-r-10.p-t-10.fs-16.font-heading
+               span.semi-bold
+                 | #{current_user.email}
+               span.text-master
+                 |  
+             .dropdown.pull-right
+               button.profile-dropdown-toggle[type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"]
+                 span.thumbnail-wrapper.d32.circular.inline.m-t-5
+                   img[src="/myAssets/image/face.jpg" alt="" data-src="/myAssets/image/face.jpg" data-src-retina="/myAssets/image/face.jpg" width="32" height="32"]
+               ul.dropdown-menu.profile-dropdown[role="menu"]
+                 li
+                   a[href="#"]
+                     i.pg-settings_small
+                     |  #{t("user.settings")}
+                 li
+                   a[href="#"]
+                     i.pg-outdent
+                     |  #{t("user.feedback")}
+                 li
+                   a[href="#"]
+                     i.pg-signals
+                     |  #{t("user.help")}
+                 li.bg-master-lighter
+                   a.clearfix[href="/logout" ]
+                     span.pull-left
+                       | #{t("user.logout")}
+                     span.pull-right
+                       i.pg-power
+      .page-content-wrapper
+            
+ 
+        .content
+          ==yield
+
+
+
+        .container-fluid.container-fixed-lg.footer
+          .copyright.sm-text-center
+            p.small.no-margin.pull-left.sm-pull-reset
+              span.hint-text
+                | Copyright © 2016 
+              span.font-montserrat
+                | EagleEye 
+              | . 
+              span.hint-text
+                | #{t("Rights")}
+              span.sm-block
+                a.m-l-10.m-r-10[href="#"]
+                  | #{t("Terms")}
+                |  | 
+                a.m-l-10[href="#"]
+                  |  #{t("Policy")}
+            p.small.no-margin.pull-right.sm-pull-reset
+              a[href="#"]
+                |   EagleEye®
+            .clearfix
+
+div class="modal fade" id="reportBugModal" aria-hidden="true" role="dialog" tabindex="-1"
+  div class="modal-dialog"
+    div class="modal-content"
+      div class="modal-header" 
+         button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+           h4 class="modal-title" id="getCroppedCanvasTitle" #{t("bugReport.title")} 
+      div class="modal-body"
+         p =t("bugReport.thanks") 
+         div class="field" 
+           form id="formData"
+             label for="description" #{t("bugReport.description")}
+             textarea.description[name="description"] 
+      div class="modal-footer"
+         button type="button" class="btn btn-default" data-dismiss="modal" #{t("bugReport.close")}
+         button type="button" class="btn btn-primary" onclick="reportBug()" #{t("bugReport.report")}
+    
+
+

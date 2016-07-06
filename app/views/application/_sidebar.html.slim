@@ -1,0 +1,56 @@
+  .page-sidebar[data-pages="sidebar"]
+    #appMenu.sidebar-overlay-slide.from-top
+
+    .sidebar-header
+      |  <img src="
+      = image_path('logo_white.png')
+      | " alt="logo" class="brand" data-src="
+      = image_path('logo_white.png')
+      | " data-src-retina="
+      = image_path('logo_white_2x.png')
+      | " width="78" height="22 "> 
+      .sidebar-header-controls
+        button.btn.btn-xs.sidebar-slide-toggle.btn-link.m-l-20[data-pages-toggle="#appMenu" type="button"]
+          i.fa.fa-angle-down.fs-16
+        button.btn.btn-link.visible-lg-inline[data-toggle-pin="sidebar" type="button"]
+          i.fa.fs-12
+    .sidebar-menu
+      ul.menu-items
+        li.m-t-30
+          a.detailed[href="#"]
+            span.title
+              | Page 1
+            span.details
+              | 234 notifications
+          span.icon-thumbnail
+            i.pg-mail
+        li
+          a[href="#"]
+            span.title
+              | Page 2
+          span.icon-thumbnail
+            i.pg-social
+        li
+          a[href="javascript:;"]
+            span.title
+              | Page 3
+            span.arrow
+          span.icon-thumbnail
+            i.pg-grid
+          ul.sub-menu
+            li
+              a[href="#"]
+                | Sub Page 1
+              span.icon-thumbnail
+                | sp
+            li
+              a[href="#"]
+                | Sub Page 2
+              span.icon-thumbnail
+                | sp
+            li
+              a[href="#"]
+                | Sub Page 3
+              span.icon-thumbnail
+                | sp
+      .clearfix

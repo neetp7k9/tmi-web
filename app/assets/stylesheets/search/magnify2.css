@@ -1,0 +1,38 @@
+ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    background: blue;
+}
+.ui-slider-vertical {
+    width: .8em;
+    height: 200px;
+}
+
+#container {
+    width:400px;
+    height:300px;
+    border:1px solid black;
+    overflow:hidden;
+    position:relative;
+    background: rgba(34,49,63,0.1);
+
+}
+#zoom_wrapper {
+    position:absolute;
+    width : 45px;
+    z-index:1;
+    left:20px;
+    top:90px;
+}
+#image {
+    margin:auto;
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+}
+#zoom_sign{
+    background-color: white;
+}
+.zoom_text{
+      color: black;
+}

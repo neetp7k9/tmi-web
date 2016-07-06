@@ -1,0 +1,31 @@
+I"ö(function() {
+  Storytime.Dashboard.Contenteditable = (function() {
+    function Contenteditable() {}
+
+    Contenteditable.prototype.init = function() {
+      var inst;
+      inst = this;
+      $(".contenteditable").each(function() {
+        var contenteditable;
+        contenteditable = $(this);
+        return inst.bindToInput(contenteditable);
+      });
+      return $(".contenteditable")[0].focus();
+    };
+
+    Contenteditable.prototype.bindToInput = function(contenteditable) {
+      var input;
+      input = $(contenteditable.data("input"));
+      return contenteditable.keyup(function() {
+        var text;
+        text = contenteditable.text();
+        return input.val(text);
+      });
+    };
+
+    return Contenteditable;
+
+  })();
+
+}).call(this);
+:ET

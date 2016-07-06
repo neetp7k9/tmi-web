@@ -1,0 +1,32 @@
+I"h(function() {
+  Storytime.Dashboard.Blogs = (function() {
+    function Blogs() {}
+
+    Blogs.prototype.initNew = function() {
+      return $(document).on('ajax:success', '.new-blog-form', function(e, data, status, xhr) {
+        if (!$(e.target).hasClass("storytime-modal-trigger")) {
+          $("#blogs").html(data.html);
+          return $("#storytime-modal").modal("hide");
+        }
+      });
+    };
+
+    Blogs.prototype.initEdit = function() {
+      return $(document).on('ajax:success', '.edit-blog-form', function(e, data, status, xhr) {
+        if (!$(e.target).hasClass("storytime-modal-trigger")) {
+          $("#blogs").html(data.html);
+          return $("#storytime-modal").modal("hide");
+        }
+      });
+    };
+
+    Blogs.prototype.initCreate = function() {};
+
+    Blogs.prototype.initUpdate = function() {};
+
+    return Blogs;
+
+  })();
+
+}).call(this);
+:ET

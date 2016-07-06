@@ -1,0 +1,21 @@
+h1 Admin#reports
+
+h2 Reports
+table.table
+ thead
+   tr
+    th Report ID 
+    th User 
+    th Description
+    th Time 
+ tbody
+ - @reports.each do |report|
+   tr
+     td
+         =report.id
+     td
+         =report.user.email 
+     td
+         =report.description 
+     td
+         =report.created_at

@@ -1,0 +1,19 @@
+I"(function() {
+  Storytime.Dashboard.Snippets = (function() {
+    function Snippets() {}
+
+    Snippets.prototype.init = function() {
+      (new Storytime.Dashboard.Wysiwyg()).init();
+      return $(document).on('ajax:success', '.edit-snippet-form', function(e, data, status, xhr) {
+        if (!$(e.target).hasClass("storytime-modal-trigger")) {
+          return $(".storytime-snippet-" + data.id + " .snippet-content").html(data.content);
+        }
+      });
+    };
+
+    return Snippets;
+
+  })();
+
+}).call(this);
+:ET

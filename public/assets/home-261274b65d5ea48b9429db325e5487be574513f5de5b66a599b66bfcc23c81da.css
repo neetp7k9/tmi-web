@@ -1,0 +1,65 @@
+#text_search_form{
+    position: absolute;
+    left: 30%;
+    top: 50%;
+}
+.title{
+    FONT-SIZE: 40PX;
+    line-height: 90px;
+}
+.email{
+    width: 300px;
+    margin: auto;
+}
+.password{
+    width: 300px;
+    margin: auto;
+}
+#tabs{
+    width: 850px;
+    height: 420px;
+    margin: auto;
+}
+p.search{
+    font-size: 30px;
+    line-height: 35px;
+    height: 40px;
+}
+
+#add_project_form{
+    position: absolute;
+    left: 30%;
+    top: 35%;
+    text-align: center;
+}
+
+.add_project_form{
+    width: 350px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    background-image: none;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    font-family: Arial, sans-serif;
+    -webkit-appearance: none;
+    color: #2c2c2c;
+    outline: 2px;
+    height: 35px;
+    padding: 9px 12px;
+    line-height: normal;
+    font-size: 14px;
+    font-weight: normal;
+    vertical-align: middle;
+    min-height: 35px;
+    box-shadow: none;
+    text-align: center;
+    margin-bottom: 2px;
+}
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+/*
+
+ */
+
+
+

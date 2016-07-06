@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @image.name
+p
+  strong Filepath:
+  = @image.filePath
+p
+  strong Project:
+  = @image.project_id
+p
+  strong Document:
+  = @image.document_id
+
+= link_to 'Edit', edit_image_path(@image)
+'|
+= link_to 'Back', documents_path

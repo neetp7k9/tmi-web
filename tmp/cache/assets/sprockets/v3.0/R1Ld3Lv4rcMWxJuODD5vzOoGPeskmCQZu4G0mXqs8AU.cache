@@ -1,0 +1,10 @@
+I"~(function() {
+  Storytime.Dashboard.Sites = (function() {
+    function Sites() {}
+
+    return Sites;
+
+  })();
+
+}).call(this);
+:ET

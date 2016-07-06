@@ -1,0 +1,60 @@
+doctype html
+html
+  head
+    title
+      |   name
+    meta[charset="utf-8"]
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
+    link[rel="stylesheet" href="/template_search_and_document/assets/css/main.css"]
+    noscript
+      link[rel="stylesheet" href="/template_search_and_document/assets/css/noscript.css"]
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+
+  body.is-loading-0.is-loading-1.is-loading-2
+    #main
+      header#header
+        h1
+           name
+        p
+          | Just another fine responsive site template
+        ul.icons
+          li
+            a.icon.fa-twitter[href="#"]
+              span.label
+                | Twitter
+          li
+            a.icon.fa-instagram[href="#"]
+              span.label
+                | Instagram
+          li
+            a.icon.fa-github[href="#"]
+              span.label
+                | Github
+          li
+            a.icon.fa-envelope-o[href="#"]
+              span.label
+                | Email
+      section#thumbnails
+        article
+          a.thumbnail[href=@document.avatar.url(:origin) data-position="left center"]
+            img[src=@document.avatar.url(:thumb) alt=""]
+          h2
+            a href="/crop?id=#{@document.id}"  Crop
+        - @images.each do |image|
+          article
+            a.thumbnail[href=image.avatar.url  data-position="left center"]
+              img[src=image.avatar.url(:thumb) alt=""]
+            h2
+              a href="" Delete 
+
+
+      footer#footer
+        ul.copyright
+          li
+            | © SudoMafia.Inc
+    script[src="/template_search_and_document/assets/js/jquery.min.js"]
+    script[src="/template_search_and_document/assets/js/skel.min.js"]
+    script[src="/template_search_and_document/assets/js/main.js"]
+    script[src="/myAssets/project.js"]
+    script[src="/myAssets/bootstrap.min.js"]
+

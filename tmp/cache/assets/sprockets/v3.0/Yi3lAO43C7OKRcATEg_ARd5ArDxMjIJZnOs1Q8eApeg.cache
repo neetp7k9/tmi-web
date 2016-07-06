@@ -1,0 +1,20 @@
+I"¦(function() {
+  Storytime.Dashboard.Navigations = (function() {
+    function Navigations() {}
+
+    Navigations.prototype.initIndex = function() {
+      return $('.sortable').sortable({
+        axis: 'y',
+        handle: '.fa-bars',
+        update: function() {
+          return $.post($(this).data('update-url'), $(this).sortable('serialize'));
+        }
+      });
+    };
+
+    return Navigations;
+
+  })();
+
+}).call(this);
+:ET

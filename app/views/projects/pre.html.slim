@@ -1,0 +1,76 @@
+doctype html
+html
+  head
+    title
+      |   @project.name
+    meta[charset="utf-8"]
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
+    link[rel="stylesheet" href="/template_search_and_document/assets/css/main.css"]
+    noscript
+      link[rel="stylesheet" href="/template_search_and_document/assets/css/noscript.css"]
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+
+  body.is-loading-0.is-loading-1.is-loading-2
+    #main
+      header#header
+        h1
+           =@project.name
+        p
+          | Just another fine responsive site template
+        ul.icons
+          li
+            a.icon.fa-twitter[href="#"]
+              span.label
+                | Twitter
+          li
+            a.icon.fa-instagram[href="#"]
+              span.label
+                | Instagram
+          li
+            a.icon.fa-github[href="#"]
+              span.label
+                | Github
+          li
+            a.icon.fa-envelope-o[href="#"]
+              span.label
+                | Email
+      section#thumbnails
+        - @project.documents.each do |document|
+          article
+            a.thumbnail[href=document.avatar.url(:origin) data-position="left center"]
+              img[src=document.avatar.url(:thumb) alt=""]
+            h2
+              a href="/crop?id=#{document.id}"  Crop
+            h2
+              a href="/documents/#{document.id}"  Croped Image
+            p
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+
+
+      button onclick="newDocument()"  Add New Document
+
+      footer#footer
+        ul.copyright
+          li
+            | © SudoMafia.Inc
+    script[src="/template_search_and_document/assets/js/jquery.min.js"]
+    script[src="/template_search_and_document/assets/js/skel.min.js"]
+    script[src="/template_search_and_document/assets/js/main.js"]
+    script[src="/myAssets/project.js"]
+    script[src="/myAssets/bootstrap.min.js"]
+
+    div class="modal fade" id="addDocumentModal" aria-hidden="true" role="dialog" tabindex="-1"
+      div class="modal-dialog"
+        div class="modal-content"
+          div class="modal-header"
+             button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+               h4 class="modal-title" id="getCroppedCanvasTitle" Add New Document
+          div class="modal-body"
+             div class="field"
+               form id="formData"
+                 label for="project_name" Document file 
+                 input type="file" name="file" id="document_file" 
+                 input type="hidden" name="project_id" value="#{@project.id}"
+          div class="modal-footer"
+             button type="button" class="btn btn-default" data-dismiss="modal" Close
+             button id="createProject" type="button" class="btn btn-primary" onclick="addDocument()" Add
