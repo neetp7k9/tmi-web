@@ -1,7 +1,14 @@
 rm -rf ./public/system/*
-rm -rf ./searchServer/index/text/*
-rm -rf ./searchServer/index/global/*
-rm -rf ./searchServer/index/local/*
+rm -rf ./searchServer/index/global/0/*
+rm -rf ./searchServer/index/global/1/*
+rm -rf ./searchServer/index/global/2/*
+rm -rf ./searchServer/index/global/3/*
+rm -rf ./searchServer/index/global/4/*
+rm -rf ./searchServer/index/local/0/*
+rm -rf ./searchServer/index/local/1/*
+rm -rf ./searchServer/index/local/2/*
+rm -rf ./searchServer/index/local/3/*
+rm -rf ./searchServer/index/local/4/*
 
 bundle exec rake db:reset
 

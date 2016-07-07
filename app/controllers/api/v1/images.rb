@@ -49,11 +49,6 @@ module API
 
           image_params = {}
           image_params[:document_id] = params[:document_id]
-          image_params[:project_id] = Document.find(params[:document_id]).project_id
-
-          crop_data = params[:crop_info].split
-          crop_info = "#{crop_data[0].to_i} #{crop_data[1].to_i} #{crop_data[0].to_i+crop_data[2].to_i} #{crop_data[1].to_i+crop_data[3].to_i}"
-          image_params[:crop_info] = crop_info
 
           new_file = ActionDispatch::Http::UploadedFile.new(params[:file])
           image_params[:avatar] = new_file

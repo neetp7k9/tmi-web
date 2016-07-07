@@ -98,16 +98,18 @@ public class Server {
                 System.out.println(response);
                 return response;
             }
-            if (map.get("user_id") == null) {
-                response = "user_id is missing ";
+            if (map.get("type") == null) {
+                response = "type_id is missing ";
                 System.out.println(response);
                 return response;
             }
 
-            System.out.println("Index Image for User : " + map.get("user_id"));
+            System.out.println("Index Image for Type : " + map.get("type"));
             System.out.println("index local feature for : " + map.get("file"));
+            System.out.println(localIndexPath + map.get("type"));
 
-            ParallelIndexer parallelIndexerLocalAppend = new ParallelIndexer(DocumentBuilder.NUM_OF_THREADS, localIndexPath + map.get("user_id"), new File(map.get("file")), false);
+            ParallelIndexer parallelIndexerLocalAppend = new ParallelIndexer(DocumentBuilder.NUM_OF_THREADS, localIndexPath + map.get("type"), new File(map.get("file")), false);
+
             parallelIndexerLocalAppend.setImagePreprocessor(new ImagePreprocessor() {
                 @Override
                 public BufferedImage process(BufferedImage image) {
@@ -117,11 +119,13 @@ public class Server {
                     return newBufferedImage;
                 }
             });
+
+            System.out.println("index local feature for : " + map.get("file"));
             parallelIndexerLocalAppend.run();
 
             System.out.println("index global feature for : " + map.get("file"));
 
-            ParallelIndexer parallelIndexerGlobalAppend = new ParallelIndexer(DocumentBuilder.NUM_OF_THREADS, globalIndexPath + map.get("user_id"), new File(map.get("file")), false);
+            ParallelIndexer parallelIndexerGlobalAppend = new ParallelIndexer(DocumentBuilder.NUM_OF_THREADS, globalIndexPath + map.get("type"), new File(map.get("file")), false);
             parallelIndexerGlobalAppend.run();
 
             response = "Indexing the file" + map.get("file");
@@ -134,6 +138,11 @@ public class Server {
             Map<String, String> map = queryToMap(URLDecoder.decode(req.queryString()));
             if (map.get("file") == null) {
                 response = "file is missing";
+                System.out.println(response);
+                return response;
+            }
+            if (map.get("type") == null) {
+                response = "type is missing";
                 System.out.println(response);
                 return response;
             }
@@ -155,11 +164,11 @@ public class Server {
 
                 IndexReader reader = null;
                 try {
-                    reader = DirectoryReader.open(new RAMDirectory(FSDirectory.open(Paths.get(localIndexPath + map.get("user_id"))), IOContext.READONCE));
-                    GenericFastImageSearcher cvsurfSearcher = new GenericFastImageSearcher(30, localFeatureClass, aggregatorClass.newInstance(), 256, true, reader, localIndexPath + map.get("user_id") + ".config");
+                    reader = DirectoryReader.open(new RAMDirectory(FSDirectory.open(Paths.get(localIndexPath + map.get("type"))), IOContext.READONCE));
+                    GenericFastImageSearcher cvsurfSearcher = new GenericFastImageSearcher(30, localFeatureClass, aggregatorClass.newInstance(), 256, true, reader, localIndexPath + map.get("type") + ".config");
                     ImageSearchHits cvsurfHits = cvsurfSearcher.search(image, reader);
                     FeatureSearchResult featureSearchResult = new FeatureSearchResult(cvsurfHits, reader, numOfOneLabel, map.get("file"), localFeatureClass.getName(), GlobalDocumentBuilder.HashingMode.None.toString());
-                    response = featureSearchResult.toString(localIndexPath + map.get("user_id"));
+                    response = featureSearchResult.toString(localIndexPath + map.get("type"));
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 } catch (InstantiationException e) {
@@ -170,11 +179,11 @@ public class Server {
             } else {
 
                 System.out.println("search global feature for : " + map.get("file"));
-                GlobalFeatureSearch globalFeatureSearch = new GlobalFeatureSearch(EdgeHistogram.class, globalIndexPath + map.get("user_id"), "", GlobalDocumentBuilder.HashingMode.None, numOfOneLabel);
+                GlobalFeatureSearch globalFeatureSearch = new GlobalFeatureSearch(EdgeHistogram.class, globalIndexPath + map.get("type"), "", GlobalDocumentBuilder.HashingMode.None, numOfOneLabel);
                 try {
                     globalFeatureSearch.initializeHashing(GenericFastImageSearcher.class, numOfResult, 50, hashFileName, numberOfReferencePoints, lenghtOfPostingList);
                     FeatureSearchResult featureSearchResult  = globalFeatureSearch.singleImageSearchResult(map.get("file"), false);
-                    response = featureSearchResult.toString(globalIndexPath + map.get("user_id"));
+                    response = featureSearchResult.toString(globalIndexPath + map.get("type"));
                 } catch (InstantiationException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
@@ -190,32 +199,6 @@ public class Server {
             return response;
         });
 
-        get("/delete_text", (req, res) -> {
-            String response = "";
-            Map<String, String> map = queryToMap(URLDecoder.decode(req.queryString()));
-            if (map.get("document_id") == null) {
-                response = "document id is missing";
-                System.out.println(response);
-                return response;
-            }
-
-            System.out.println("start to delete TEXT!!!!!!!!!");
-
-            String indexPath = textIndexPath + map.get("user_id");
-            try{
-                IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
-                FSDirectory indexDirectory = FSDirectory.open(Paths.get(indexPath));
-                IndexWriter writer = new IndexWriter(indexDirectory, config);
-                writer.deleteDocuments(new Term("document_id", map.get("document_id")));
-                writer.commit();
-                writer.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "error";
-            }
-
-            return "success";
-        });
 
         get("/delete", (req, res) -> {
             String response = "";
@@ -231,7 +214,7 @@ public class Server {
             IndexWriter writer = null;
 
             System.out.println("delete local data");
-            String indexPath = localIndexPath + map.get("user_id");
+            String indexPath = localIndexPath + map.get("type");
             try {
                 writer = new IndexWriter(FSDirectory.open(Paths.get(indexPath)), config);
                 writer.deleteDocuments(new Term("image_id", map.get("image_id")));
@@ -249,7 +232,7 @@ public class Server {
             }
 
             System.out.println("delete global data");
-            indexPath = globalIndexPath + map.get("user_id");
+            indexPath = globalIndexPath + map.get("type");
             try {
 
 
@@ -269,157 +252,11 @@ public class Server {
         });
 
 
-        get("/search_text", (req, res) -> {
-
-            System.out.println("start text searching");
-            String response = "";
-            System.out.println(req.queryString());
-            Map<String, String> map = queryToMap(URLDecoder.decode(req.queryString()));
-            if (map.get("text") == null) {
-                response = "text is missing";
-                System.out.println(response);
-                return response;
-            }
-
-            IndexSearcher searcher = null;
-            QueryParser parser = null;
-
-            try {
-                System.out.println("here1");
-                searcher = new IndexSearcher(DirectoryReader.open(FSDirectory.open(Paths.get(textIndexPath + map.get("user_id")))));
-                System.out.println("here2");
-            } catch (IOException e) {
-                System.out.println("here3");
-                e.printStackTrace();
-            }
-
-            System.out.println("here");
-            parser = new QueryParser("content", new StandardAnalyzer());
-
-            Query query = null;
-            TopDocs hits=null;
-            String queryString = null;
-
-            System.out.println("here");
-            try {
-                    queryString = map.get("text");
-                    System.out.println(map.get("text"));
-                    Term term = new Term("content", queryString);
-                    //create the term query object
-//                    query = new FuzzyQuery(term);
-                    query = new FuzzyQuery(term);
-                    //do the search
-//                query = parser.parse(map.get("text") );
-                hits = searcher.search(query, 30);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            for(int i=0;i<hits.scoreDocs.length;i++){
-                try {
-                    System.out.print(searcher.doc(hits.scoreDocs[i].doc).get("path") + " : ");
-                    response += searcher.doc(hits.scoreDocs[i].doc).get("document_id") + " " + hits.scoreDocs[i].score + "\n";
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                System.out.println(hits.scoreDocs[i].score);
-            }
-            return response;
-        });
-        get("/index_document", (req, res) -> {
-            String response = null;
-            Directory indexDirectory = null;
-            IndexWriter writer = null;
-            Map<String, String> map = queryToMap(URLDecoder.decode(req.queryString()));
-            if (map.get("file") == null) {
-                response = "file is missing";
-                System.out.println(response);
-                return response;
-            }
-            if (map.get("document_id") == null) {
-                response = "document id is missing";
-                System.out.println(response);
-                return response;
-            }
-            try{
-                indexDirectory = FSDirectory.open(Paths.get(textIndexPath + map.get("user_id")));
-                IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
-                writer = new IndexWriter(indexDirectory,config);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            File f = new File(map.get("file"));
-            PDDocument pddDocument = null;
-            String content= null;
-            PDFTextStripper textStripper = null;
-            try {
-                pddDocument = PDDocument.load(f);
-                textStripper = new PDFTextStripper();
-                content = textStripper.getText(pddDocument);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            //System.out.println(content.substring(0, 500));
-
-            PDDocumentInformation info = pddDocument.getDocumentInformation();
-            System.out.println("Page Count=" + pddDocument.getNumberOfPages());
-            System.out.println("Title=" + info.getTitle());
-            System.out.println("Author=" + info.getAuthor());
-            System.out.println("Subject=" + info.getSubject());
-            System.out.println("Keywords=" + info.getKeywords());
-            System.out.println("Creator=" + info.getCreator());
-            System.out.println("Producer=" + info.getProducer());
-            System.out.println("Creation Date=" + info.getCreationDate());
-            System.out.println("Modification Date=" + info.getModificationDate());
-            System.out.println("Trapped=" + info.getTrapped());
-
-            System.out.println("start indexing0");
-            Document doc = new Document();
-
-            System.out.println("add document_id");
-            doc.add(new StringField("document_id", map.get("document_id"), Store.YES));
-
-            System.out.println("add Title");
-            if(info.getTitle()!= null)
-                doc.add(new StringField("Title", info.getTitle(), Store.YES));
-
-            System.out.println("add author");
-            if(info.getAuthor()!= null)
-                doc.add(new StringField("Author", info.getAuthor(), Store.YES));
-            if(info.getCreator()!= null)
-                doc.add(new StringField("Creator", info.getCreator().toString(), Store.YES));
-            if(info.getCreationDate()!= null)
-                doc.add(new StringField("Creation Date", info.getCreationDate().toString(), Store.YES));
-
-            System.out.println("add Modification");
-            if(info.getModificationDate()!= null)
-            doc.add(new StringField("Modification Date", info.getModificationDate().toString(), Store.YES));
-            doc.add(new StringField("path", map.get("file"), Store.YES));
-
-            System.out.println("add content");
-            doc.add(new TextField("content",content.replaceAll("[^A-Za-z0-9.:\n \\[\\]\\-°±\\)\\(]+", ""),Store.YES));
-
-            try {
-                writer.addDocument(doc);
-                writer.close();
-                pddDocument.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            System.out.println("finish indexing");
-
-            return "";
-        });
-
         get("/check_all", (req, res) -> {
             String response = "";
             Map<String, String> map = queryToMap(URLDecoder.decode(req.queryString()));
-            if (map.get("user_id") == null) {
-                response = "user id is missing";
+            if (map.get("type") == null) {
+                response = "type is missing";
                 System.out.println(response);
                 return response;
             }
@@ -428,10 +265,10 @@ public class Server {
             String indexPath = null;
             if (map.get("feature") == null) {
                 System.out.println("check global feature");
-                indexPath = globalIndexPath + map.get("user_id");
+                indexPath = globalIndexPath + map.get("type");
             }else{
                 System.out.println("check local feature");
-                indexPath = localIndexPath + map.get("user_id");
+                indexPath = localIndexPath + map.get("type");
             }
 
             try{
@@ -441,53 +278,6 @@ public class Server {
                     String filePath = reader.document(i).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0];
                     response += String.valueOf(i) + " => id : " + getID(filePath) + " , " + reader.document(i).getValues("image_id")[0] + " " + filePath + "\n";
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "error";
-            }
-            return response;
-        });
-        get("/update_image_id", (req, res) -> {
-            String response = "";
-            Map<String, String> map = queryToMap(URLDecoder.decode(req.queryString()));
-            if (map.get("user_id") == null) {
-                response = "user id is missing";
-                System.out.println(response);
-                return response;
-            }
-
-            System.out.println("start to go through");
-            String indexPath = null;
-            if (map.get("feature") == null) {
-                System.out.println("update global feature");
-                indexPath = globalIndexPath + map.get("user_id");
-            }else{
-                System.out.println("update local feature");
-                indexPath = localIndexPath + map.get("user_id");
-            }
-//            String field = "field";
-//            if (map.get("field") != null) {
-//                field =  map.get("field");
-//            }
-
-            try{
-                IndexReader reader = DirectoryReader.open(new RAMDirectory(FSDirectory.open(Paths.get(indexPath)), IOContext.READONCE));
-                IndexWriterConfig config = new IndexWriterConfig(new StandardAnalyzer());
-                FSDirectory indexDirectory = FSDirectory.open(Paths.get(indexPath));
-                IndexWriter writer = new IndexWriter(indexDirectory, config);
-
-                ArrayList<Document> storedDocument = new ArrayList<Document>();
-                for(int i=0; i<reader.numDocs();i++){
-                    response += String.valueOf(i) + " => id : " + getID(reader.document(i).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0]) + " , " + reader.document(i).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0] + "\n";
-                    Document d = reader.document(i);
-                    d.add(new StringField("image_id", String.valueOf(getID(reader.document(i).getValues(DocumentBuilder.FIELD_NAME_IDENTIFIER)[0])), Store.YES));
-                    storedDocument.add(d);
-                }
-                writer.deleteAll();
-                writer.commit();
-                writer.addDocuments(storedDocument);
-                writer.commit();
-                writer.close();
             } catch (IOException e) {
                 e.printStackTrace();
                 return "error";

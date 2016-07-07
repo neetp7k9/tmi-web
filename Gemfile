@@ -198,6 +198,6 @@ group :development, :test do
 end
 
 group :profile do
-  gem 'stackprof'
+#  gem 'stackprof'
 end
 

@@ -47,15 +47,15 @@ module API
       resource :check_all do
         desc 'check all record'
         params do
-          optional :user_id, type: Integer, default: 1, desc: 'user id'
+          optional :type, type: Integer, default: 1, desc: 'user id'
           optional :feature, type: String, desc: 'feature'
         end
         get do
           solr = RSolr.connect :url => 'http://127.0.0.1:8000'
           if params[:feature]
-            response = solr.get '/check_all', :params => {:wt => "xml", :user_id => params[:user_id], :feature => "test"}
+            response = solr.get '/check_all', :params => {:wt => "xml", :type => params[:type], :feature => "test"}
           else
-            response = solr.get '/check_all', :params => {:wt => "xml", :user_id => params[:user_id]}
+            response = solr.get '/check_all', :params => {:wt => "xml", :type => params[:type]}
           end
           return response 
         end

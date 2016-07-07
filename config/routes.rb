@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :documents
   resources :projects
   get 'searches/:id' => 'search#show'
-  get 'search_results/:id' => 'search_result#show'
   root to: "home#home"
   get 'home/home'
 
@@ -18,12 +17,7 @@ Rails.application.routes.draw do
   resources :document
   resources :image
 
-  get '/crop_to_search' => 'home#crop_to_search'
   get '/home/index' => 'home#index'
-  get '/crop' => 'home#crop'
-  post '/search_by_document' => 'home#search_by_document'
-  post '/search_by_project' => 'home#search_by_project'
-  post '/crop' => 'home#crop'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

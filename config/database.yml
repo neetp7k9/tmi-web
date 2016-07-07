@@ -13,7 +13,7 @@ default: &default
 
 development:
   <<: *default
-  database: 'nexus'
+  database: 'web_tmi'
   pool: 5
   username: root 
   password: 1aA$:adf_asd134 
@@ -29,7 +29,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: 'nexus_test'
+  database: 'web_tmi_test'
 #  username: <%= ENV['MYSQL_USERNAME'] %>
 #  password: <%= ENV['MYSQL_PASSWORD'] %>
   username: root 
@@ -37,7 +37,7 @@ test:
 
 production:
   <<: *default
-  database: 'nexus_development'
+  database: 'web_tmi_development'
   username: <%= ENV['MYSQL_USERNAME'] %>
   password: <%= ENV['MYSQL_PASSWORD'] %>
   username: root 

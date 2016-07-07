@@ -22,15 +22,6 @@ module API
           user.email = params[:email]
           user.password = params[:password]
           user.save!
-          #create user folder
-          #local global text
-          FileUtils.mkdir root_path + "global/" + user.id.to_s 
-          FileUtils.mkdir root_path + "local/" + user.id.to_s
-          FileUtils.mkdir root_path + "text/" + user.id.to_s 
-          FileUtils.cp_r    root_path + "global.config",  root_path + "global/"  
-          FileUtils.mv    root_path + "global/global.config",  root_path + "global/" + user.id.to_s + ".config/" 
-          FileUtils.cp_r    root_path + "local.config",  root_path + "local/"  
-          FileUtils.mv    root_path + "local/local.config",  root_path + "local/" + user.id.to_s + ".config/" 
           
           {
             user: user

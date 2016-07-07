@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>AllExtractors</comment>
+<entry key="7.extractor">net.semanticmetadata.lire.imageanalysis.features.global.centrist.SimpleCentrist</entry>
+<entry key="1.extractor">net.semanticmetadata.lire.imageanalysis.features.global.CEDD</entry>
+<entry key="4.extractor">net.semanticmetadata.lire.imageanalysis.features.global.FCTH</entry>
+<entry key="2.extractor">net.semanticmetadata.lire.imageanalysis.features.global.EdgeHistogram</entry>
+<entry key="5.extractor">net.semanticmetadata.lire.imageanalysis.features.global.AutoColorCorrelogram</entry>
+<entry key="3.extractor">net.semanticmetadata.lire.imageanalysis.features.global.centrist.SpatialPyramidCentrist</entry>
+<entry key="7">global</entry>
+<entry key="6.extractor">net.semanticmetadata.lire.imageanalysis.features.global.joint.JointHistogram</entry>
+<entry key="6">global</entry>
+<entry key="0.info.5">256</entry>
+<entry key="5">global</entry>
+<entry key="0.info.4">128</entry>
+<entry key="4">global</entry>
+<entry key="0.info.3">64</entry>
+<entry key="3">global</entry>
+<entry key="0.info.2">32</entry>
+<entry key="2">global</entry>
+<entry key="0.info.1">net.semanticmetadata.lire.aggregators.BOVW</entry>
+<entry key="1">global</entry>
+<entry key="0.info.0">null</entry>
+<entry key="0">info</entry>
+</properties>
