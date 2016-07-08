@@ -1,41 +1,10 @@
-body.is-loading-0.is-loading-1.is-loading-2
-    =stylesheet_link_tag "search"
-    link[href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet']
-    #main
-      header#header
-        h1 #{t("search_result.title")}
-        p
-          - if @search_text != nil
-            h1 #{t("search_result.text")}
-            h2 =@search_text 
-      - @search_target.each do |origin, thumb, link_to_result|
-        article
-          a.thumbnail[href="#{link_to_result}" data-position="left center"]
-            img[src="#{thumb}" alt=""]
-          h2 Search Target 
-      - if @search_text != nil
-        h1 #{t("search_result.description1", :text => @search_text, :size => @response.size)}
-        h1 #{t("search_result.description2")}
-      - else
-        h1 #{t("search_result.description3", :size => @response.size)}
-      section#thumbnails
-        - i = 1
-        - @response.each do |document,score,image|
-          article
-            a.thumbnail[href=image data-position="left center"]
-              img[src=document.avatar.url(:thumb) alt=""]
-            p 1
-            h2 =document.name
-            p
-               a href="/projects/#{document.project_id}" 
-                -if document.project
-                 =document.project.name 
-                                 
-          - i = i + 1
+h1 target 
+- if @search_target != nil
+  img src="#{@search_target[0]}"
 
-      footer#footer
-        ul.copyright
-          li
-            | © SudoMafia.Inc
-
-    =javascript_include_tag "search"
+h1 result
+div.result[style="align-text: center"] 
+  - @response.each_with_index do |info, index|
+    h1 コーディネート #{index}
+    - info[0].images.each do |image|
+      img src="#{image.avatar.url(:medium)}"  

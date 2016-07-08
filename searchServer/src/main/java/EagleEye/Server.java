@@ -4,6 +4,8 @@ import net.semanticmetadata.lire.aggregators.AbstractAggregator;
 import net.semanticmetadata.lire.aggregators.BOVW;
 import net.semanticmetadata.lire.builders.DocumentBuilder;
 import net.semanticmetadata.lire.builders.GlobalDocumentBuilder;
+import net.semanticmetadata.lire.imageanalysis.features.global.AutoColorCorrelogram;
+import net.semanticmetadata.lire.imageanalysis.features.global.CEDD;
 import net.semanticmetadata.lire.imageanalysis.features.global.EdgeHistogram;
 import net.semanticmetadata.lire.imageanalysis.features.local.opencvfeatures.CvSurfExtractor;
 import net.semanticmetadata.lire.indexers.parallel.ImagePreprocessor;
@@ -179,7 +181,9 @@ public class Server {
             } else {
 
                 System.out.println("search global feature for : " + map.get("file"));
-                GlobalFeatureSearch globalFeatureSearch = new GlobalFeatureSearch(EdgeHistogram.class, globalIndexPath + map.get("type"), "", GlobalDocumentBuilder.HashingMode.None, numOfOneLabel);
+                GlobalFeatureSearch globalFeatureSearch = new GlobalFeatureSearch(CEDD.class, globalIndexPath + map.get("type"), "", GlobalDocumentBuilder.HashingMode.None, numOfOneLabel);
+             //   GlobalFeatureSearch globalFeatureSearch = new GlobalFeatureSearch(EdgeHistogram.class, globalIndexPath + map.get("type"), "", GlobalDocumentBuilder.HashingMode.None, numOfOneLabel);
+
                 try {
                     globalFeatureSearch.initializeHashing(GenericFastImageSearcher.class, numOfResult, 50, hashFileName, numberOfReferencePoints, lenghtOfPostingList);
                     FeatureSearchResult featureSearchResult  = globalFeatureSearch.singleImageSearchResult(map.get("file"), false);

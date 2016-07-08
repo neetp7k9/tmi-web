@@ -34,7 +34,7 @@ module API
         params do
           requires :file, type: File,  desc: 'image'
           optional :type, type: Integer, default: 0, desc: 'clothes type'
-          optional :search_id, type: Integer, default: 0, desc: 'search id'
+          optional :search_id, type: Integer, desc: 'search id'
         end
         post do
           p "save image for searching"
@@ -54,7 +54,7 @@ module API
           search_id = params[:search_id]
           unless params[:search_id]
             search = Search.new
-            search.document_id = params[:document_id]
+            search.document_id = image_id 
             search.user_id = current_user.id 
             search.save
             search_id = search.id
@@ -78,7 +78,7 @@ module API
           p "do local Search"
           searchResult = SearchResult.new
           searchResult.image_id = image_id
-          searchResult.search_id = params[:search_id]
+          searchResult.search_id = search_id
           response = solr.get '/search', :params => {:wt => "xml", :type => clothes_type, :file => image_path, :feature => "local feature"}
           searchResult.result = response.to_s
           searchResult.search_type = 1
@@ -87,7 +87,7 @@ module API
 
           p "finish search"
 
-          return "success"
+          return search.id
         end
       end
     end
