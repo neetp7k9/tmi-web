@@ -52,13 +52,11 @@ module API
             image_params[:avatar] = new_file
             image = Image.new(image_params)
             image.save
-            p "create document image"
-            next if key == :clothes 
+            p "image have saved"
             image_path = URI.unescape(image.avatar.url(:origin).split("?")[0])
-            p "create document image"
             file_path = "#{root_path}/#{image.id}"
             File.open(file_path, "wb") { |f| f.write(Rails.root.to_s + "/public" + image_path) }
-            p "indexing document image"
+            p "file_path =>  #{file_path}"
             solr = RSolr.connect :url => 'http://127.0.0.1:8000'
             response = solr.get '/index', :params => {:wt=>"xml", :type => @@type_hash[key], :file => file_path}
 

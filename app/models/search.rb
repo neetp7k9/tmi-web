@@ -49,21 +49,6 @@ class Search < ActiveRecord::Base
     end
     return @response
   end
-  def create_crop_document document_id, crop_data
-     image_path = Document.find(document_id).avatar.url(:origin).split("?")[0]
-     path = "/tmp/#{document_id}_#{id}.jpg"
-     file_path = Rails.root.to_s + "/public/" + path
-     FileUtils.cp Rails.root.to_s+"/public"+URI.unescape(image_path), file_path
-     cmd = "convert #{file_path} -fill none -stroke red -strokewidth 3"
-     crop_data.uniq.each do |data|
-       pos = data.split
-       pos_string = "#{pos[0]},#{pos[1]} #{pos[2]},#{pos[3]}"
-       cmd += " -draw \'stroke-dasharray 5 5 rectangle #{pos_string} \'" 
-     end
-     p cmd
-     system(cmd +  " #{file_path}")  
-     return path   
-  end
   def analyze search_result
     result = Hash.new(0)
     crop_info = {}

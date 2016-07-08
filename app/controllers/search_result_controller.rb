@@ -5,11 +5,6 @@ class SearchResultController < ApplicationController
     @search_result = SearchResult.find(params[:id])
     @info = @search_result.response
     @search_target  = @search_result.search_target
-    if @search_target.is_a?(String)
-      @search_text = @search_target
-      @search_target = nil
-    end
-    @search_type = @search_result.search_type_text
     if @search_result.search_type == 0
        @nextPageTitle = "local feature result"
        @nextPageURL = "/search_results/"+(@search_result.id+1).to_s

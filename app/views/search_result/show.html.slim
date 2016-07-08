@@ -2,14 +2,9 @@ h1 =@search_type
 - if @nextPageURL 
   h3 
     a[href="#{@nextPageURL}"] =@nextPageTitle 
-h3
-  a[href="/searches/#{@search_result.search_id.to_s}"] back to result 
 h1 target 
 - if @search_target != nil
   img src="#{@search_target[0]}"
-- if @search_text != nil
-  h1 Search Text
-  h2 =@search_text
 
 h1 result 
 - @info.each do |info|

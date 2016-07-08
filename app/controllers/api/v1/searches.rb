@@ -43,6 +43,7 @@ module API
           image_params[:avatar] = new_file
           image = Image.new(image_params)
           image.user_id = current_user.id 
+          image.clothes_type = params[:type] 
           image.save
           image_id = image.id
           p "start searching"

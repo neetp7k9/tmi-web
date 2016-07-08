@@ -60,7 +60,3 @@ build/
 # local configuration
 /config/application.yml
 
-
-/searchServer/index/global
-/searchServer/index/local
-/searchServer/index/text

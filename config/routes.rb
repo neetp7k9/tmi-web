@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :images
   resources :documents
   resources :projects
+  get 'search_results/:id' => 'search_result#show'
   get 'searches/:id' => 'search#show'
   root to: "home#home"
   get 'home/home'
