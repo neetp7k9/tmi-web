@@ -16,7 +16,7 @@ development:
   database: 'web_tmi'
   pool: 5
   username: root 
-  password: 1aA$:adf_asd134 
+  password: 1234567890
 #  adapter: mysql2
 #  encoding: utf8
 #  database: 'nexus'
@@ -33,7 +33,7 @@ test:
 #  username: <%= ENV['MYSQL_USERNAME'] %>
 #  password: <%= ENV['MYSQL_PASSWORD'] %>
   username: root 
-  password: 1aA$:adf_asd134 
+  password: 1234567890
 
 production:
   <<: *default

@@ -8,6 +8,7 @@ class Image < ActiveRecord::Base
   validates_attachment :avatar, content_type: { content_type: ["image/jpeg", "image/jpg", "image/png", "application/pdf"] }
 
   belongs_to :project
+  belongs_to :coordinate_clothe
   belongs_to :document
 
   before_destroy :destroy_image

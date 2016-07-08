@@ -1,13 +1,13 @@
 development:
   MYSQL_DATABASE: 'Web_tmi_develop'
   MYSQL_USERNAME: 'root'
-  MYSQL_PASSWORD: '1aA$:adf_asd134'
+  MYSQL_PASSWORD: '1234567890'
 test:
   MYSQL_DATABASE: 'Web_tmi_test'
   MYSQL_USERNAME: 'root'
-  MYSQL_PASSWORD: '1aA$:adf_asd134'
+  MYSQL_PASSWORD: '1234567890'
 production:
   MYSQL_DATABASE: 'Web_tmi'
   MYSQL_USERNAME: 'root'
-  MYSQL_PASSWORD: '1aA$:adf_asd134'
+  MYSQL_PASSWORD: '1234567890'
 

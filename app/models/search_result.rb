@@ -41,7 +41,7 @@ class SearchResult < ActiveRecord::Base
         result_image = Image.find(items[1].to_i)
         p "image #{items[1].to_i} => #{items[2]}"
         p "document #{result_image.document_id} => #{items[2]}"
-        info.push [result_image.document.name, result_image, items[2]]
+        info.push [result_image.coordinate_clothe, result_image, items[2]]
       end
     end
     return info
