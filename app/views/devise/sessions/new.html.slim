@@ -1,12 +1,15 @@
+br
+br
+br
 h2
-  | Log in
-= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {  class: 'form-signin' } ) do |f|
+  | ファッションサポート 
+= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: {  class: 'form-signin', style: 'text-align: center;width: 350px;margin: auto;'} ) do |f|
   .form-inputs
     = f.input :email, required: false, autofocus: true,  class: 'form-control', id: "inputEmail", placeholder:"Email", label: false
     = f.input :password, required: false, class: 'form-control', id: "inputPassword", placeholder:"Password" , label: false
     = f.input :remember_me, as: :boolean , label: false if devise_mapping.rememberable?  
   .form-actions
-    = f.button :submit, "Log in" , class: 'btn btn-lg btn-primary btn-block', style: "width: 300px;margin: auto;"
-
-
+    = f.button :submit, "ログイン" , class: 'btn btn-lg btn-primary btn-block', style: "width: 350px;margin: auto;display: inline"
+br
+a[href="/users/sign_up", style="position: absolute;left: 870px;"] 新規取得
 = render "devise/shared/links"

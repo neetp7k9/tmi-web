@@ -1,0 +1,13 @@
+=javascript_include_tag "home"
+=stylesheet_link_tag "home"
+.whiteSpace
+.text
+   h2.title 私の服 
+
+.container-fluid.container-fixed-lg.sm-p-l-20.sm-p-r-20
+  .gallery
+ 
+    - @mySearches.each do |search|
+     .gallery-item[data-width="1" data-height="1" ]
+       a[href="/searches/#{search.id}"] 
+         img.image-responsive-height[src="#{Image.find(search.document_id).avatar.url(:medium)}" alt=""]

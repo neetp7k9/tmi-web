@@ -1,11 +1,13 @@
-h2
-  | Sign up
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+br
+br
+br
+= simple_form_for(resource, as: resource_name, url: registration_path(resource_name),  html: {  class: 'form-signin', style: 'text-align: center;width: 350px;margin: auto;'} ) do |f|
   = f.error_notification
   .form-inputs
-    = f.input :email, required: true, autofocus: true
-    = f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length)
-    = f.input :password_confirmation, required: true
+    = f.input :email, required: true, autofocus: true,   class: 'form-control', id: "inputEmail", placeholder:"メールアドレス", label: false
+    = f.input :password, required: true, class: 'form-control', placeholder:"パスワード", label: false, hint: ("#{@minimum_password_length}個以上の文字" if @minimum_password_length)
+    = f.input :password_confirmation, required: true, class: 'form-control', placeholder:"同じパスワード", label: false
   .form-actions
-    = f.button :submit, "Sign up"
+    = f.button :submit, "新規取得" , class: 'btn btn-lg btn-primary btn-block', style: "width: 350px;margin: auto;display: inline"
+br
 = render "devise/shared/links"

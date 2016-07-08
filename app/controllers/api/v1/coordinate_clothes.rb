@@ -30,7 +30,7 @@ module API
       end
       resource :coordinate_cloth do
         params do
-          requires :clothes, type: File, desc: 'cloth is required'
+          optional :clothes, type: File, desc: 'cloth is required'
           requires :pants, type: File, desc: 'pant is required'
           optional :shoes, type: File, desc: 'shoes is optional'
           optional :hat, type: File, desc: 'hat is optional' 

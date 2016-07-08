@@ -1,8 +1,8 @@
-h1 target 
+h1 あなたの服
 - if @search_target != nil
   img src="#{@search_target[0]}"
 
-h1 result
+h1 お薦めのコーディネー！ 
 div.result[style="align-text: center"] 
   - @response.each_with_index do |info, index|
     h1 コーディネート #{index}

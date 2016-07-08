@@ -10,7 +10,9 @@ class HomeController < ApplicationController
   def search_by_text
   end
 
-  def index
+  def myClothes
+    @user = current_user
+    @mySearches = Search.where(user_id: @user.id)
   end
 
   def search_by_document

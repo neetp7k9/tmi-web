@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   resources :image
 
   get '/home/index' => 'home#index'
+  get 'myClothes' => 'home#myClothes'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
