@@ -1,13 +1,51 @@
 =javascript_include_tag "home"
 =stylesheet_link_tag "home"
 .whiteSpace
-.text
-   h2.title 私の服 
 
+.text
+   h2.title 私の上着
 .container-fluid.container-fixed-lg.sm-p-l-20.sm-p-r-20
   .gallery
- 
     - @mySearches.each do |search|
-     .gallery-item[data-width="1" data-height="1" ]
-       a[href="/searches/#{search.id}"] 
-         img.image-responsive-height[src="#{Image.find(search.document_id).avatar.url(:medium)}" alt=""]
+     -if Image.find(search.document_id).clothes_type == 0
+       .gallery-item[data-width="1" data-height="1" ]
+         a[href="/searches/#{search.id}"] 
+           img.image-responsive-height[src="#{Image.find(search.document_id).avatar.url(:medium)}" alt=""]
+
+.text
+   h2.title 私のパンツかスカート
+.container-fluid.container-fixed-lg.sm-p-l-20.sm-p-r-20
+  .gallery
+    - @mySearches.each do |search|
+     -if Image.find(search.document_id).clothes_type == 1 
+       .gallery-item[data-width="1" data-height="1" ]
+         a[href="/searches/#{search.id}"] 
+           img.image-responsive-height[src="#{Image.find(search.document_id).avatar.url(:medium)}" alt=""]
+.text
+   h2.title 私の靴
+.container-fluid.container-fixed-lg.sm-p-l-20.sm-p-r-20
+  .gallery
+    - @mySearches.each do |search|
+     -if Image.find(search.document_id).clothes_type == 2
+       .gallery-item[data-width="1" data-height="1" ]
+         a[href="/searches/#{search.id}"] 
+           img.image-responsive-height[src="#{Image.find(search.document_id).avatar.url(:medium)}" alt=""]
+
+.text
+   h2.title 私のハット
+.container-fluid.container-fixed-lg.sm-p-l-20.sm-p-r-20
+  .gallery
+    - @mySearches.each do |search|
+     -if Image.find(search.document_id).clothes_type == 3
+       .gallery-item[data-width="1" data-height="1" ]
+         a[href="/searches/#{search.id}"] 
+           img.image-responsive-height[src="#{Image.find(search.document_id).avatar.url(:medium)}" alt=""]
+.text
+   h2.title　その他
+.container-fluid.container-fixed-lg.sm-p-l-20.sm-p-r-20
+  .gallery
+    - @mySearches.each do |search|
+     -if Image.find(search.document_id).clothes_type == 4 
+       .gallery-item[data-width="1" data-height="1" ]
+         a[href="/searches/#{search.id}"] 
+           img.image-responsive-height[src="#{Image.find(search.document_id).avatar.url(:medium)}" alt=""]
