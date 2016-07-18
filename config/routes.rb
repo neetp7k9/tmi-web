@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'searches/:id' => 'search#show'
   root to: "home#home"
   get 'home/home'
+  get "upload" => "home#upload"
 
   mount API::Endpoints => '/api'
   mount GrapeSwaggerRails::Engine => '/documentation'

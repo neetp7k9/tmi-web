@@ -7,7 +7,8 @@ class HomeController < ApplicationController
     @projects ||= [] 
   end
 
-  def search_by_text
+  def upload
+    
   end
 
   def myClothes
@@ -15,21 +16,6 @@ class HomeController < ApplicationController
     @mySearches = Search.where(user_id: @user.id)
   end
 
-  def search_by_document
-  end
-
-  def crop_to_search
-    @document_id = params[:id]
-    @document = Document.find(@document_id)
-    @search_id = params[:search_id]
-  end
-  def crop
-    @id = params[:id]
-    @document = Document.find(@id)
-  end
-
-  def search_result
-  end
   def logout
     sign_out current_user
     redirect_to :root

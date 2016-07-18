@@ -6,5 +6,8 @@ h1 お薦めのコーディネー！
 div.result[style="align-text: center"] 
   - @response.each_with_index do |info, index|
     h1 コーディネート #{index}
-    - info[0].images.each do |image|
-      img src="#{image.avatar.url(:medium)}"  
+    img src="#{info[0].images[0].avatar.url(:medium)}"  
+    img src="#{Image.where({:clothes_type=>1})[info[0].images[0].id%4].avatar.url(:medium)}"  
+    img src="#{Image.where({:clothes_type=>2})[info[0].images[0].id%8].avatar.url(:medium)}"  
+    img src="#{Image.where({:clothes_type=>3})[info[0].images[0].id%8].avatar.url(:medium)}"  
+    img src="#{Image.where({:clothes_type=>4})[info[0].images[0].id%8].avatar.url(:medium)}"  
